@@ -1,0 +1,2 @@
+rootProject.name='Soldier Countdown Pro!'
+include ':app'
