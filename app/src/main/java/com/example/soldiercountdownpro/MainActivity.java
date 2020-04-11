@@ -1,16 +1,15 @@
 package com.example.soldiercountdownpro;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,10 +28,6 @@ public class MainActivity extends AppCompatActivity {
         String fullName = prefs.getString("full_name", "");
         String email = prefs.getString("email_address", "");
 
-        Toast.makeText(this, performSync + "", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, syncInterval, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, fullName, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
 
         prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
         boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
