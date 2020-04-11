@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="Homecoming Date">
+        <Preference
+            android:title="Date"
+            android:key="homecoming_date"
+            android:summary="The day you come back home"
+            />
+        <Preference
+            android:title="Time"
+            android:key="homecoming_time"
+            android:summary="Specific time that you return home"
+            />
 
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Service Started">
+        <Preference
+            android:title="Date"
+            android:key="servicestarted_date"
+            android:summary="The date that you started"
+            />
+        <Preference
+            android:title="Time"
+            android:key="servicestarted_time"
+            android:summary="The time that you started"
+            />
 
     </PreferenceCategory>
 

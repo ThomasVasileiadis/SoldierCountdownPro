@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         String fullName = prefs.getString("full_name", "");
         String email = prefs.getString("email_address", "");
 
+
         prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
         boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
 
