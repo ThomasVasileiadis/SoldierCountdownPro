@@ -6,6 +6,4 @@
     android:layout_height="match_parent"
     android:background="@drawable/camouflage5"
     tools:context=".MainActivity" >
-
-
 </RelativeLayout>
