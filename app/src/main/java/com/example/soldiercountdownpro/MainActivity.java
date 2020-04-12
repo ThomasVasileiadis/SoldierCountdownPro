@@ -18,8 +18,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    public void ablia (){
+        Toast.makeText(this , "This is a fucking test",Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Main");
+        actionBar.setTitle("");
         ImageView personalPhotoView = (ImageView) findViewById(R.id.personalPhoto);
         personalPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
