@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import java.sql.Time;
+
 
 public class Settings extends PreferenceActivity {
     private  TextView mDisplayDate;
@@ -58,8 +60,7 @@ public class Settings extends PreferenceActivity {
                     return true;
                 }
             });
-
-
+            final TimePreference tp = (TimePreference) findPreference("keyname3");
 
 
 
