@@ -27,7 +27,7 @@
         <com.example.soldiercountdownpro.TimePreference
             android:key="keyname4"
             android:title="Time"
-            android:summary="Summary" />
+            android:summary="" />
 
     </PreferenceCategory>
 
