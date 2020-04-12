@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/camouflage5"
     tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/personalPhoto"
+        android:layout_width="261dp"
+        android:layout_height="283dp"
+        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+
 </RelativeLayout>
