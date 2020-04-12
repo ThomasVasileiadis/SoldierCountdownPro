@@ -71,6 +71,17 @@ public class Settings extends PreferenceActivity {
                     return true;
                 }
             });
+            final TimePreference tp2 = (TimePreference) findPreference("keyname4");
+            String blabla4 = tp2.getText();
+            tp2.setSummary((String) blabla4);
+            tp2.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    //your code to change values.
+                    tp2.setSummary((String) newValue);
+                    return true;
+                }
+            });
         }
     }
 }
