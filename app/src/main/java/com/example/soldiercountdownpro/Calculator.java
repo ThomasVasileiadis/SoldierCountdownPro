@@ -21,7 +21,7 @@ public class Calculator {
         this.endDate = endDate;
     }
 
-    public long calculateDifference(){
+    public long calculateDifference() {
         LocalDate date1 = LocalDate.parse(this.startDate, formatter);
         LocalDate date2 = LocalDate.parse(this.endDate, formatter);
         long daysBetween = Duration.between(date1.atStartOfDay(), date2.atStartOfDay()).toDays();

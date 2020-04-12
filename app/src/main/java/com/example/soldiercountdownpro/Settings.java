@@ -8,6 +8,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
@@ -15,9 +16,8 @@ import java.sql.Time;
 
 
 public class Settings extends PreferenceActivity {
-    private  TextView mDisplayDate;
+    private TextView mDisplayDate;
     private static DatePickerDialog.OnDateSetListener mDateSetListener;
-
 
 
     @Override
@@ -28,7 +28,7 @@ public class Settings extends PreferenceActivity {
 
     }
 
-    public static class MyPreferenceFragment extends PreferenceFragment  {
+    public static class MyPreferenceFragment extends PreferenceFragment {
 
 
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -37,38 +37,40 @@ public class Settings extends PreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
             // dp and blabla is for homecoming date
-            final DatePreference dp= (DatePreference) findPreference("keyname");
+            final DatePreference dp = (DatePreference) findPreference("keyname");
             String blabla = dp.getText();
             dp.setSummary((String) blabla);
             dp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
-                public boolean onPreferenceChange(Preference preference,Object newValue) {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
                     //your code to change values.
                     dp.setSummary((String) newValue);
                     return true;
                 }
             });
             //dp2 and blabla2 is for service started date
-            final DatePreference dp2= (DatePreference) findPreference("keyname2");
+            final DatePreference dp2 = (DatePreference) findPreference("keyname2");
             String blabla2 = dp2.getText();
             dp2.setSummary((String) blabla2);
             dp2.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
-                public boolean onPreferenceChange(Preference preference,Object newValue) {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
                     //your code to change values.
                     dp2.setSummary((String) newValue);
                     return true;
                 }
             });
             final TimePreference tp = (TimePreference) findPreference("keyname3");
-
-
-
-//            findPreference("homecoming_date").setOnPreferenceClickListener(preference -> {
-//               Toast.makeText(getActivity(), "This is a fucking test",Toast.LENGTH_SHORT).show();
-//                return false;
-//            });
-
+            String blabla3 = tp.getText();
+            tp.setSummary((String) blabla3);
+            tp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    //your code to change values.
+                    tp.setSummary((String) newValue);
+                    return true;
+                }
+            });
         }
     }
 }

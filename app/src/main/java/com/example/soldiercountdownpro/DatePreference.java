@@ -7,6 +7,7 @@ import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.DatePicker;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -17,6 +18,7 @@ public class DatePreference extends DialogPreference {
     private String dateval;
     private CharSequence mSummary;
     private DatePicker picker = null;
+
     public static int getYear(String dateval) {
         String[] pieces = dateval.split("-");
         return (Integer.parseInt(pieces[0]));

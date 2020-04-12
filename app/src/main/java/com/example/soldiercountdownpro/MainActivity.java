@@ -17,13 +17,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
+
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public void ablia (){
-        Toast.makeText(this , "This is a fucking test",Toast.LENGTH_SHORT).show();
+    public void ablia() {
+        Toast.makeText(this, "This is a fucking test", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addImageFromGallery(){
+    public void addImageFromGallery() {
         try {
             if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);

@@ -11,20 +11,21 @@ import android.widget.TimePicker;
 
 public class TimePreference extends DialogPreference {
     private static String time;
-    private int lastHour=0;
-    private int lastMinute=0;
-    private TimePicker picker=null;
+    private Integer lastHour = 0;
+    private Integer lastMinute = 0;
+    private TimePicker picker = null;
+    private CharSequence mSummary;
 
     public static int getHour(String time) {
-        String[] pieces=time.split(":");
+        String[] pieces = time.split(":");
 
-        return(Integer.parseInt(pieces[0]));
+        return (Integer.parseInt(pieces[0]));
     }
 
     public static int getMinute(String time) {
-        String[] pieces=time.split(":");
+        String[] pieces = time.split(":");
 
-        return(Integer.parseInt(pieces[1]));
+        return (Integer.parseInt(pieces[1]));
     }
 
     public TimePreference(Context ctxt, AttributeSet attrs) {
@@ -36,9 +37,9 @@ public class TimePreference extends DialogPreference {
 
     @Override
     protected View onCreateDialogView() {
-        picker=new TimePicker(getContext());
+        picker = new TimePicker(getContext());
 
-        return(picker);
+        return (picker);
     }
 
     @Override
@@ -54,10 +55,10 @@ public class TimePreference extends DialogPreference {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {
-            lastHour=picker.getCurrentHour();
-            lastMinute=picker.getCurrentMinute();
+            lastHour = picker.getCurrentHour();
+            lastMinute = picker.getCurrentMinute();
 
-            String time=String.valueOf(lastHour)+":"+String.valueOf(lastMinute);
+            String time = String.valueOf(lastHour) + ":" + String.valueOf(lastMinute);
 
             if (callChangeListener(time)) {
                 persistString(time);
@@ -69,26 +70,40 @@ public class TimePreference extends DialogPreference {
 
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
-        return(a.getString(index));
+        return (a.getString(index));
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
 
         if (restoreValue) {
-            if (defaultValue==null) {
-                time=getPersistedString("00:00");
+            if (defaultValue == null) {
+                time = getPersistedString("00:00");
+            } else {
+                time = getPersistedString(defaultValue.toString());
             }
-            else {
-                time=getPersistedString(defaultValue.toString());
-            }
-        }
-        else {
-            time=defaultValue.toString();
+        } else {
+            time = defaultValue.toString();
         }
 
-        lastHour=getHour(time);
-        lastMinute=getMinute(time);
+        lastHour = getHour(time);
+        lastMinute = getMinute(time);
+    }
+
+    public String getText() {
+        return time;
+    }
+
+    public CharSequence getSummary() {
+        return mSummary;
+    }
+
+    public void setSummary(CharSequence summary) {
+        if (summary == null && mSummary != null || summary != null
+                && !summary.equals(mSummary)) {
+            mSummary = summary;
+            notifyChanged();
+        }
     }
 
 }
