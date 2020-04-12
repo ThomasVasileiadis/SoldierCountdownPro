@@ -2,6 +2,10 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <com.example.soldiercountdownpro.TimePreference
+        android:key="keyname3"
+        android:title="Time"
+        android:summary="Summary" />
 
 
     <PreferenceCategory android:title="Homecoming Date">
