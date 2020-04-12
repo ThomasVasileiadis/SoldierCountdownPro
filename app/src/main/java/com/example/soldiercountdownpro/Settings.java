@@ -3,6 +3,7 @@ package com.example.soldiercountdownpro;
 import android.app.DatePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.widget.TextView;
@@ -33,12 +34,26 @@ public class Settings extends PreferenceActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
-
-
-            findPreference("homecoming_date").setOnPreferenceClickListener(preference -> {
-               Toast.makeText(getActivity(), "This is a fucking test",Toast.LENGTH_SHORT).show();
-                return false;
+            final DatePreference dp= (DatePreference) findPreference("keyname");
+            //dp.setText("2020-01-02");
+            //dp.setSummary("2020-08-02");
+            String blabla = dp.getText();
+            dp.setSummary((String) blabla);
+            dp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference,Object newValue) {
+                    //your code to change values.
+                    dp.setSummary((String) newValue);
+                    return true;
+                }
             });
+
+
+
+//            findPreference("homecoming_date").setOnPreferenceClickListener(preference -> {
+//               Toast.makeText(getActivity(), "This is a fucking test",Toast.LENGTH_SHORT).show();
+//                return false;
+//            });
 
         }
     }
