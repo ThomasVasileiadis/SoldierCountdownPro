@@ -34,9 +34,8 @@ public class Settings extends PreferenceActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+            // dp and blabla is for homecoming date
             final DatePreference dp= (DatePreference) findPreference("keyname");
-            //dp.setText("2020-01-02");
-            //dp.setSummary("2020-08-02");
             String blabla = dp.getText();
             dp.setSummary((String) blabla);
             dp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -47,6 +46,20 @@ public class Settings extends PreferenceActivity {
                     return true;
                 }
             });
+            //dp2 and blabla2 is for service started date
+            final DatePreference dp2= (DatePreference) findPreference("keyname2");
+            String blabla2 = dp2.getText();
+            dp2.setSummary((String) blabla2);
+            dp2.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference,Object newValue) {
+                    //your code to change values.
+                    dp2.setSummary((String) newValue);
+                    return true;
+                }
+            });
+
+
 
 
 

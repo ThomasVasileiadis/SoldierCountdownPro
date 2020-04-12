@@ -7,28 +7,27 @@
     <PreferenceCategory android:title="Homecoming Date">
         <com.example.soldiercountdownpro.DatePreference
             android:key="keyname"
-            android:title="Date Preference"
+            android:title="Date"
             android:summary="Summary" />
 
         <Preference
             android:title="Time"
             android:key="homecoming_time"
-            android:summary="Specific time that you return home"
+            android:summary=""
             />
 
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Service Started">
-        <Preference
+        <com.example.soldiercountdownpro.DatePreference
+            android:key="keyname2"
             android:title="Date"
-            android:key="servicestarted_date"
-            android:summary="The date that you started"
-            />
+            android:summary="Summary" />
         <Preference
             android:title="Time"
             android:key="servicestarted_time"
-            android:summary="The time that you started"
+            android:summary=""
             />
 
     </PreferenceCategory>
