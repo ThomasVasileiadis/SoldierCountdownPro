@@ -3,6 +3,8 @@ package com.example.soldiercountdownpro;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,10 +16,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-
 import java.sql.Time;
 import java.util.Calendar;
 
@@ -101,11 +101,11 @@ public class Settings extends PreferenceActivity {
 
             //Reminder Preference
            // final ReminderPreference rp = (ReminderPreference) findPreference("enableReminders");
-            findPreference("enableReminders").setOnPreferenceClickListener(preference -> {
-                Toast.makeText(getActivity(), "Reminders are enabled.",
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            });
+//            findPreference("enableReminders").setOnPreferenceClickListener(preference -> {
+//
+//                return false;
+//            });
+
         }
     }
 }
