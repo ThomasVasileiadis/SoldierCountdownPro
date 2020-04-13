@@ -3,14 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/camouflage5"
-    tools:context=".MainActivity" >
+    android:layout_height="wrap_content"
+    android:background="@drawable/camouflage_main"
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/personalPhoto"
-        android:layout_width="261dp"
-        android:layout_height="283dp"
+        android:layout_width="220dp"
+        android:layout_height="210dp"
+        android:background="@drawable/photo_frame"
         app:srcCompat="@android:drawable/divider_horizontal_bright" />
+
+    <ImageView
+        android:id="@+id/timer"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignLeft="@id/personalPhoto"
+        android:layout_marginLeft="234dp"
+        android:background="@drawable/timer"
+        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+
+    <ImageView
+        android:id="@+id/note"
+        android:layout_width="match_parent"
+        android:layout_height="406dp"
+        android:layout_below="@id/personalPhoto"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="115dp"
+        android:layout_marginBottom="-384dp"
+        android:background="@drawable/note"
+        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+
 
 </RelativeLayout>
