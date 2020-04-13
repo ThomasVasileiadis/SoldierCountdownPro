@@ -22,6 +22,8 @@ import com.bumptech.glide.Glide;
 
 import android.widget.Toast;
 
+import java.text.ParseException;
+
 public class MainActivity extends AppCompatActivity {
 
     public void ablia() {
@@ -49,11 +51,20 @@ public class MainActivity extends AppCompatActivity {
         String fullName = prefs.getString("full_name", "");
         String email = prefs.getString("email_address", "");
 
+        String keyname = prefs.getString("keyname", "");
+        String keyname2 = prefs.getString("keyname2", "");
+        String keyname3 = prefs.getString("keyname3", "");
+        String keyname4 = prefs.getString("keyname4", "");
 
         prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
         boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
 
-
+        Calculator myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
+        try {
+            System.out.println("Days passed: " + myCalculator.calculateDifference());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
