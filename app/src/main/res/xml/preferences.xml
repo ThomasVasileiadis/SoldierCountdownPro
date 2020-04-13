@@ -57,33 +57,5 @@
             android:summary="Define how often synchronization will be performed"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Personal Information">
-
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="full_name"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="Your full name"
-            android:dialogTitle="Enter your full name"
-            android:dialogMessage="Enter full name"
-            android:inputType="textCapWords"
-            android:summary="Enter your full name to be used in the application"/>
-
-
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="email_address"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="Email Address"
-            android:summary="Enter your email address"
-            android:dialogTitle="Enter your email address"
-            android:dialogMessage="Enter your email address"
-            android:inputType="textEmailAddress"/>
-    </PreferenceCategory>
-
-
-
 
 </PreferenceScreen>
