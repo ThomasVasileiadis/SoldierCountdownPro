@@ -5,11 +5,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -24,25 +29,36 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public void ablia() {
-        Toast.makeText(this, "This is a fucking test", Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); // Get all the saved preferences from the settings activity
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
         ImageView personalPhotoView = (ImageView) findViewById(R.id.personalPhoto);
+
         personalPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addImageFromGallery();
             }
         });
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); // Get all the saved preferences from the settings activity
+
+
+        boolean er = prefs.getBoolean("enableReminders", false);
+
+        if (er == true){
+            Toast.makeText(this, "Reminders are enabled.",
+                    Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(this, "Reminders are disabled.",
+                    Toast.LENGTH_SHORT).show();
+        }
+
 
         boolean performSync = prefs.getBoolean("perform_sync", true);
         String syncInterval = prefs.getString("sync_interval", "30");
@@ -52,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
         prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
         boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
-
-
     }
 
     @Override
