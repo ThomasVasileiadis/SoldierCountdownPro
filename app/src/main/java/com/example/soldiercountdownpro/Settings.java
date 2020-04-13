@@ -1,11 +1,17 @@
 package com.example.soldiercountdownpro;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.provider.AlarmClock;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.sql.Time;
+import java.util.Calendar;
 
 
 public class Settings extends PreferenceActivity {
@@ -36,6 +43,7 @@ public class Settings extends PreferenceActivity {
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+
             // dp and blabla is for homecoming date
             final DatePreference dp = (DatePreference) findPreference("keyname");
             String blabla = dp.getText();
@@ -45,6 +53,8 @@ public class Settings extends PreferenceActivity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     //your code to change values.
                     dp.setSummary((String) newValue);
+                    Toast.makeText(getActivity(), "Date has been set sucesfully.",
+                            Toast.LENGTH_SHORT).show();
                     return true;
                 }
             });
@@ -57,6 +67,8 @@ public class Settings extends PreferenceActivity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     //your code to change values.
                     dp2.setSummary((String) newValue);
+                    Toast.makeText(getActivity(), "Date has been set sucesfully.",
+                            Toast.LENGTH_SHORT).show();
                     return true;
                 }
             });
@@ -68,6 +80,8 @@ public class Settings extends PreferenceActivity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     //your code to change values.
                     tp.setSummary((String) newValue);
+                    Toast.makeText(getActivity(), "Time has been set sucesfully.",
+                            Toast.LENGTH_SHORT).show();
                     return true;
                 }
             });
@@ -79,8 +93,18 @@ public class Settings extends PreferenceActivity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     //your code to change values.
                     tp2.setSummary((String) newValue);
+                    Toast.makeText(getActivity(), "Time has been set sucesfully.",
+                            Toast.LENGTH_SHORT).show();
                     return true;
                 }
+            });
+
+            //Reminder Preference
+           // final ReminderPreference rp = (ReminderPreference) findPreference("enableReminders");
+            findPreference("enableReminders").setOnPreferenceClickListener(preference -> {
+                Toast.makeText(getActivity(), "Reminders are enabled.",
+                        Toast.LENGTH_SHORT).show();
+                return false;
             });
         }
     }
