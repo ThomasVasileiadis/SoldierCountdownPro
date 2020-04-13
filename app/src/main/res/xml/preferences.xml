@@ -36,8 +36,10 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="enableReminders"
-            android:title="Enable Reminders"
-            android:summary="Get reminded with notification"/>
+            android:summary="Get reminded with notification"
+            android:summaryOff="Reminders are OFF"
+            android:summaryOn="Reminders are ON"
+            android:title="Enable Reminders" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Sync Information">
