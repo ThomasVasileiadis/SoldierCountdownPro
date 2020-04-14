@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
         String keyname3 = prefs.getString("keyname3", "");
         String keyname4 = prefs.getString("keyname4", "");
 
-        prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
-        boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
+//        prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
+//        boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
 
         Calculator myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
         try {

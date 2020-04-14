@@ -3,23 +3,21 @@ package com.example.soldiercountdownpro;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.provider.AlarmClock;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import java.sql.Time;
+
 import java.util.Calendar;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 
 public class Settings extends PreferenceActivity {
@@ -32,7 +30,6 @@ public class Settings extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
         mDisplayDate = (TextView) findViewById(R.id.tvDate);
-
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment {
@@ -105,6 +102,30 @@ public class Settings extends PreferenceActivity {
 //
 //                return false;
 //            });
+            Preference switchPref = (Preference) findPreference("enableReminders");
+            switchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    boolean isOn = (boolean) newValue;
+                    if (isOn==true) {
+                        //switch is on
+                        Toast toast = Toast.makeText(getActivity(), "Reminders are ON.", Toast.LENGTH_SHORT);
+                        toast.show();
+                        Calendar calendar = Calendar.getInstance();
+                        Intent intent = new Intent(getContext(), NotificationReciever.class);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 100, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    } else {
+                        //switch is off
+                        Toast toast2 = Toast.makeText(getActivity(), "Reminders are OFF.", Toast.LENGTH_SHORT);
+                        toast2.show();
+
+                    }
+
+                    return true;
+                }
+            });
+
 
         }
     }
