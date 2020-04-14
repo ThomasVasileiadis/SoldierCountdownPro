@@ -3,7 +3,9 @@ package com.example.soldiercountdownpro;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -15,6 +17,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
+
+import java.io.IOException;
 import java.util.Calendar;
 
 import static androidx.core.content.ContextCompat.getSystemService;
@@ -102,23 +109,26 @@ public class Settings extends PreferenceActivity {
 //
 //                return false;
 //            });
+            SharedPreferences settings = null;
             Preference switchPref = (Preference) findPreference("enableReminders");
+            Context mContext = getContext();
+
             switchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     boolean isOn = (boolean) newValue;
+
                     if (isOn==true) {
                         //switch is on
                         Toast toast = Toast.makeText(getActivity(), "Reminders are ON.", Toast.LENGTH_SHORT);
                         toast.show();
-                        Calendar calendar = Calendar.getInstance();
-                        Intent intent = new Intent(getContext(), NotificationReciever.class);
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 100, intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                        FirebaseMessaging.getInstance().subscribeToTopic("Reminders");
+
                     } else {
                         //switch is off
                         Toast toast2 = Toast.makeText(getActivity(), "Reminders are OFF.", Toast.LENGTH_SHORT);
                         toast2.show();
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic("Reminders");
 
                     }
 
