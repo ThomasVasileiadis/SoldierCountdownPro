@@ -10,28 +10,60 @@
     <ImageView
         android:id="@+id/personalPhoto"
         android:layout_width="220dp"
-        android:layout_height="210dp"
+        android:layout_height="240dp"
+        android:background="@drawable/frame"
+        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+
+
+    <ImageView
+        android:id="@+id/frame"
+        android:layout_width="184dp"
+        android:layout_height="165dp"
+        android:layout_alignRight="@id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="56dp"
         android:background="@drawable/photo_frame"
         app:srcCompat="@android:drawable/divider_horizontal_bright" />
 
     <ImageView
         android:id="@+id/timer"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="177dp"
+        android:layout_height="177dp"
         android:layout_alignLeft="@id/personalPhoto"
         android:layout_marginLeft="234dp"
         android:background="@drawable/timer"
         app:srcCompat="@android:drawable/divider_horizontal_bright" />
 
     <ImageView
-        android:id="@+id/note"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_below="@id/personalPhoto"
-        android:layout_alignParentTop="false"
-        android:layout_marginTop="1dp"
+        android:layout_width="500dp"
+        android:layout_height="530dp"
+        android:layout_alignRight="@id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-191dp"
+        android:layout_marginBottom="-452dp"
+
         android:background="@drawable/note"
-        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+        android:rotation="-10" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="134dp"
+        android:layout_height="178dp"
+        android:layout_alignLeft="@id/personalPhoto"
+        android:layout_marginLeft="256dp" />
+
+    <ImageView
+        android:layout_width="186dp"
+        android:layout_height="155dp"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+
+
+        android:layout_marginRight="-156dp"
+        android:layout_marginBottom="-123dp"
+        android:background="@drawable/chain" />
 
 
 </RelativeLayout>
