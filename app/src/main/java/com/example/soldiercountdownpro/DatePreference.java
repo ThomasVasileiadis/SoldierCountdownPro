@@ -183,7 +183,7 @@ public class DatePreference extends DialogPreference implements
      * @return the Calendar set to the default date
      */
     public static Calendar defaultCalendar() {
-        return new GregorianCalendar(1970, 0, 1);
+        return new GregorianCalendar(2020, 0, 1);
     }
 
     /**
