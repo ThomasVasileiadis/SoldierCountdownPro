@@ -13,13 +13,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -122,13 +117,12 @@ public class Settings extends PreferenceActivity {
                         //switch is on
                         Toast toast = Toast.makeText(getActivity(), "Reminders are ON.", Toast.LENGTH_SHORT);
                         toast.show();
-                        FirebaseMessaging.getInstance().subscribeToTopic("Reminders");
 
                     } else {
                         //switch is off
                         Toast toast2 = Toast.makeText(getActivity(), "Reminders are OFF.", Toast.LENGTH_SHORT);
                         toast2.show();
-                        FirebaseMessaging.getInstance().unsubscribeFromTopic("Reminders");
+
 
                     }
 
