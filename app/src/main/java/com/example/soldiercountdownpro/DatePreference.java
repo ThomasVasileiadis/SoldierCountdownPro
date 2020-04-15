@@ -85,7 +85,7 @@ public class DatePreference extends DialogPreference implements
      * @return the SimpleDateFormat used for XML dates
      */
     public static SimpleDateFormat formatter() {
-        return new SimpleDateFormat("yyyy.MM.dd");
+        return new SimpleDateFormat("yyyy-MM-dd");
     }
 
     /**
