@@ -1,11 +1,13 @@
 package com.example.soldiercountdownpro;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -19,20 +21,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
+import cn.iwgang.countdownview.CountdownView;
 
 public class MainActivity extends AppCompatActivity {
-
+    SharedPreferences sp;
+    private CountDownTimer countDownTimer;
+    private boolean timerRunning;
+    public long difference;
+    public long elapsedTime;
+    View countDownText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); // Get all the saved preferences from the settings activity
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs",Context.MODE_PRIVATE);
+        String imagePath = sp.getString("picturePath","");
 
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
-        ImageView personalPhotoView = (ImageView) findViewById(R.id.personalPhoto);
+        ImageView personalPhotoView = (ImageView) findViewById(R.id.frame);
+        Glide.with(getApplicationContext())
+                .load(imagePath)
+                .centerCrop()
+                .into(personalPhotoView);
 
         personalPhotoView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,18 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         boolean er = prefs.getBoolean("enableReminders", false);
-
-        if (er == true){
-            Toast.makeText(this, "Reminders are enabled.",
-                    Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(this, "Reminders are disabled.",
-                    Toast.LENGTH_SHORT).show();
-        }
-
 
         boolean performSync = prefs.getBoolean("perform_sync", true);
         String syncInterval = prefs.getString("sync_interval", "30");
@@ -66,11 +72,27 @@ public class MainActivity extends AppCompatActivity {
 //        boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
 
         Calculator myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
+
         try {
-            System.out.println("Days passed: " + myCalculator.calculateDifference());
+            elapsedTime = myCalculator.calculateElapsed();
+            Toast.makeText(this, "Elapsed = "+ elapsedTime + "ms",
+                    Toast.LENGTH_SHORT).show();
+            CountdownView mCvCountdownView = (CountdownView)findViewById(R.id.countDownView);
+            mCvCountdownView.start(elapsedTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        try {
+            difference = myCalculator.calculateDifference();
+            Toast.makeText(this, "Difference = "+ difference + "ms",
+                    Toast.LENGTH_SHORT).show();
+            CountdownView mCvCountdownView = (CountdownView)findViewById(R.id.countDownView);
+            mCvCountdownView.start(difference);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -101,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 //        startActivityForResult(intent, 2);
     }
@@ -120,8 +141,45 @@ public class MainActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView personalPhotoView = (ImageView) findViewById(R.id.personalPhoto);
-            Glide.with(getApplicationContext()).load(picturePath).centerCrop().into(personalPhotoView);
+            ImageView personalPhotoView = (ImageView) findViewById(R.id.frame);
+            Glide.with(getApplicationContext())
+                    .load(picturePath)
+                    .centerCrop()
+                    .into(personalPhotoView);
+            sp = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("picturePath", picturePath);
+            editor.commit();
+            Toast.makeText(this, "Picture path saved.", Toast.LENGTH_SHORT).show();
+
+
         }
     }
+//    public void startTimer(){
+//        countDownTimer = new CountDownTimer(difference, 1000) {
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                difference = millisUntilFinished;
+//                updateTimer();
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//
+//            }
+//        }.start();
+//    }
+//    public void updateTimer(){
+//        int minutes = (int) difference / 60000;
+//        int seconds = (int) difference % 60000/ 1000;
+//
+//        String timeLeftText;
+//
+//        timeLeftText = "" + minutes;
+//        timeLeftText += ":";
+//        if(seconds<10) timeLeftText += "0";
+//        timeLeftText += seconds;
+//        countDownText.setText(timeLeftText);
+//    }
 }
