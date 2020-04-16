@@ -1,5 +1,7 @@
 package com.example.soldiercountdownpro;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +15,7 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -21,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
 import java.text.ParseException;
+import java.util.Calendar;
+
 import cn.iwgang.countdownview.CountdownView;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     public long difference;
     public long elapsedTime;
     View countDownText;
+    private Context mContext;
+    private EditText hours;
+    private EditText minutes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         boolean er = prefs.getBoolean("enableReminders", false);
+        //If er(enableReminders) is true then enabled a scheduled alarm, else cancel it
+        if (er){
+            NotificationHelper.scheduleRepeatingRTCNotification(mContext, hours.getText().toString(), minutes.getText().toString());
+            NotificationHelper.enableBootReceiver(mContext);
+
+        }else {
+            NotificationHelper.cancelAlarmRTC();
+            NotificationHelper.disableBootReceiver(mContext);
+        }
+
 
         boolean performSync = prefs.getBoolean("perform_sync", true);
         String syncInterval = prefs.getString("sync_interval", "30");
@@ -147,11 +166,12 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("picturePath", picturePath);
             editor.commit();
-            Toast.makeText(this, "Picture path saved.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Profile picture set.", Toast.LENGTH_SHORT).show();
 
 
         }
     }
     //       prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
     //       boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
+
 }
