@@ -2,6 +2,7 @@ package com.example.soldiercountdownpro;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public long difference;
     public long elapsedTime;
     View countDownText;
-    private Context mContext;
+    public Context mContext;
     private EditText hours;
     private EditText minutes;
 
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); // Get all the saved preferences from the settings activity
         SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs",Context.MODE_PRIVATE);
         String imagePath = sp.getString("picturePath",""); //Get the saved imagePath and load it again whenever MainActivity is "created" again
+        mContext = getApplicationContext();
+
+        hours = (EditText)findViewById(R.id.editTextHH);
+        minutes = (EditText) findViewById(R.id.editTextMM);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
@@ -63,11 +68,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         boolean er = prefs.getBoolean("enableReminders", false);
+//        ComponentName receiver = new ComponentName(mContext, AlarmBootReceiver.class);
+//        PackageManager pm = mContext.getPackageManager();
         //If er(enableReminders) is true then enabled a scheduled alarm, else cancel it
         if (er){
             NotificationHelper.scheduleRepeatingRTCNotification(mContext, hours.getText().toString(), minutes.getText().toString());
             NotificationHelper.enableBootReceiver(mContext);
-
         }else {
             NotificationHelper.cancelAlarmRTC();
             NotificationHelper.disableBootReceiver(mContext);
