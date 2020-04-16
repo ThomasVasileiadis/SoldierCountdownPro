@@ -21,10 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import cn.iwgang.countdownview.CountdownView;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); // Get all the saved preferences from the settings activity
         SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs",Context.MODE_PRIVATE);
-        String imagePath = sp.getString("picturePath","");
-
+        String imagePath = sp.getString("picturePath",""); //Get the saved imagePath and load it again whenever MainActivity is "created" again
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
@@ -63,14 +58,13 @@ public class MainActivity extends AppCompatActivity {
         boolean performSync = prefs.getBoolean("perform_sync", true);
         String syncInterval = prefs.getString("sync_interval", "30");
 
+        //Getting values into MainActivity, for keynames, from sharedPreferences
         String keyname = prefs.getString("keyname", "");
         String keyname2 = prefs.getString("keyname2", "");
         String keyname3 = prefs.getString("keyname3", "");
         String keyname4 = prefs.getString("keyname4", "");
 
-//        prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
-//        boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
-
+        //Calling Calculator and passing the keynames I just got to calculate the difference between two dates in milliseconds
         Calculator myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
 
         try {
@@ -112,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Function that opens gallery to pick an image from
     public void addImageFromGallery() {
         try {
             if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -127,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 //        startActivityForResult(intent, 2);
     }
 
+    //When the user selects something, then load the image in ImageView(personalPhotoView) and save imagePath in sharedPreferences
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -156,30 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-//    public void startTimer(){
-//        countDownTimer = new CountDownTimer(difference, 1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                difference = millisUntilFinished;
-//                updateTimer();
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//
-//            }
-//        }.start();
-//    }
-//    public void updateTimer(){
-//        int minutes = (int) difference / 60000;
-//        int seconds = (int) difference % 60000/ 1000;
-//
-//        String timeLeftText;
-//
-//        timeLeftText = "" + minutes;
-//        timeLeftText += ":";
-//        if(seconds<10) timeLeftText += "0";
-//        timeLeftText += seconds;
-//        countDownText.setText(timeLeftText);
-//    }
+    //       prefs.edit().putBoolean("shouldWe", true).apply(); // This is how i add a value to the shared preferences
+    //       boolean shouldWe = prefs.getBoolean("shouldWe", false); // This is how to get it back
 }

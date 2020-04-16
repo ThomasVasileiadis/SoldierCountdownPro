@@ -1,17 +1,13 @@
 package com.example.soldiercountdownpro;
 
-import android.content.Context;
 import android.os.Build;
-
+import androidx.annotation.RequiresApi;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.RequiresApi;
 
 public class Calculator  {
 
