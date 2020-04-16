@@ -1,7 +1,9 @@
 package com.example.soldiercountdownpro;
 
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,9 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import java.util.Calendar;
+
 public class Settings extends PreferenceActivity {
     private TextView mDisplayDate;
     private static DatePickerDialog.OnDateSetListener mDateSetListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +97,7 @@ public class Settings extends PreferenceActivity {
 
             SharedPreferences settings = null;
             Preference switchPref = (Preference) findPreference("enableReminders");
-            Context mContext = getContext();
+            Context mContext = getActivity();
 
             switchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -101,12 +106,11 @@ public class Settings extends PreferenceActivity {
 
                     if (isOn==true) {
                         //switch is on
-                        Toast toast = Toast.makeText(getActivity(), "Reminders are ON.", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getActivity(), "Reminders are enabled, daily at 8:00 AM", Toast.LENGTH_SHORT);
                         toast.show();
-
                     } else {
                         //switch is off
-                        Toast toast2 = Toast.makeText(getActivity(), "Reminders are OFF.", Toast.LENGTH_SHORT);
+                        Toast toast2 = Toast.makeText(getActivity(), "Reminders are disabled.", Toast.LENGTH_SHORT);
                         toast2.show();
 
 
