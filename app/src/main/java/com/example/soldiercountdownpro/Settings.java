@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
@@ -20,6 +21,8 @@ import java.util.Calendar;
 public class Settings extends PreferenceActivity {
     private TextView mDisplayDate;
     private static DatePickerDialog.OnDateSetListener mDateSetListener;
+    public static EditText hours;
+    public static EditText minutes;
 
 
     @Override
@@ -112,8 +115,6 @@ public class Settings extends PreferenceActivity {
                         //switch is off
                         Toast toast2 = Toast.makeText(getActivity(), "Reminders are disabled.", Toast.LENGTH_SHORT);
                         toast2.show();
-
-
                     }
 
                     return true;
