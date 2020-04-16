@@ -7,6 +7,26 @@
     android:background="@drawable/camouflage_main"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/editTextHH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:hint="HH"
+        android:layout_weight=".25"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/editTextMM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:hint="MM"
+        android:layout_weight=".25"
+        android:visibility="invisible"/>
+
     <ImageView
         android:id="@+id/personalPhoto"
         android:layout_width="220dp"
@@ -92,6 +112,9 @@
         app:suffixTextSize="20sp"
         app:timeTextColor="#000000"
         app:timeTextSize="22sp" />
+
+
+
 
 
 </RelativeLayout>
