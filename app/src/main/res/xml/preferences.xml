@@ -2,21 +2,15 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-
-
     <PreferenceCategory android:title="Homecoming Date">
         <com.example.soldiercountdownpro.DatePreference
             android:key="keyname"
             android:title="Date"
             android:summary="Summary" />
-
         <com.example.soldiercountdownpro.TimePreference
             android:key="keyname3"
             android:title="Time"
             android:summary="" />
-
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Service Started">
@@ -28,7 +22,6 @@
             android:key="keyname4"
             android:title="Time"
             android:summary="" />
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Show Reminders">
@@ -41,23 +34,5 @@
             android:summaryOn="Reminders are ON"
             android:title="Enable Reminders" />
     </PreferenceCategory>
-
-    <PreferenceCategory android:title="Sync Information">
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="perform_sync"
-            android:title="Enable Auto Sync"
-            android:summary="Enable or disable data synchronization"/>
-        <ListPreference
-            android:defaultValue="30"
-            android:entries="@array/updateInterval"
-            android:entryValues="@array/updateIntervalValues"
-            android:key="sync_interval"
-            android:title="Sync Interval"
-            android:dependency="perform_sync"
-            android:summary="Define how often synchronization will be performed"/>
-    </PreferenceCategory>
-
 
 </PreferenceScreen>
