@@ -43,7 +43,7 @@
         android:layout_alignBottom="@+id/personalPhoto"
         android:layout_marginRight="18dp"
         android:layout_marginBottom="56dp"
-        android:background="@drawable/photo_frame"
+        android:background="@drawable/soldier"
         app:srcCompat="@android:drawable/divider_horizontal_bright" />
 
     <ImageView
@@ -56,6 +56,7 @@
         app:srcCompat="@android:drawable/divider_horizontal_bright" />
 
     <ImageView
+        android:id="@+id/bignote"
         android:layout_width="500dp"
         android:layout_height="530dp"
         android:layout_alignRight="@id/personalPhoto"
@@ -65,13 +66,13 @@
         android:background="@drawable/note"
         android:rotation="-10" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="134dp"
-        android:layout_height="178dp"
-        android:layout_alignLeft="@id/personalPhoto"
-        android:layout_marginLeft="256dp" />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        style="?android:attr/progressBarStyle"-->
+<!--        android:layout_width="134dp"-->
+<!--        android:layout_height="178dp"-->
+<!--        android:layout_alignLeft="@id/personalPhoto"-->
+<!--        android:layout_marginLeft="256dp" />-->
 
 
     <ImageView
@@ -79,42 +80,126 @@
         android:layout_height="155dp"
         android:layout_alignRight="@+id/personalPhoto"
         android:layout_alignBottom="@+id/personalPhoto"
-
-
         android:layout_marginRight="-156dp"
         android:layout_marginBottom="-123dp"
-        android:background="@drawable/chain" />
+        android:background="@drawable/chain"
+        />
 
-    <cn.iwgang.countdownview.CountdownView
-        android:id="@+id/countDownView"
-        android:layout_width="221dp"
-        android:layout_height="31dp"
+
+    <TextView
+        android:id="@+id/months_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignRight="@+id/personalPhoto"
         android:layout_alignBottom="@+id/personalPhoto"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="-97dp"
-        android:layout_marginBottom="-181dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="-81dp"
         android:rotation="-10"
-        app:isHideTimeBackground="true"
-        app:isShowDay="true"
-        app:isShowHour="true"
-        app:isShowMillisecond="true"
-        app:isShowMinute="true"
-        app:isShowSecond="true"
-        app:isTimeTextBold="true"
-        app:suffixGravity="bottom"
-        app:suffixDay="d"
-        app:suffixHour="h"
-        app:suffixMillisecond="ms"
-        app:suffixMinute="m"
-        app:suffixSecond="s"
-        app:suffixTextColor="#000000"
-        app:suffixTextSize="20sp"
-        app:timeTextColor="#000000"
-        app:timeTextSize="22sp" />
+        android:fontFamily="@font/marlboro"
+        android:text="00 "
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
+    <TextView
+        android:id="@+id/weeks_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="-138dp"
+        android:rotation="-10"
+        android:text="00 "
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/marlboro"
+        android:textColor="@color/black"/>
 
+    <TextView
+        android:id="@+id/days_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="-193dp"
+        android:rotation="-10"
+        android:text="00 "
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/marlboro"
+        android:textColor="@color/black"/>
 
+    <TextView
+        android:id="@+id/hrs_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-10dp"
+        android:layout_marginBottom="-240dp"
+        android:rotation="-10"
+        android:text="00"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/marlboro"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/min_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-31dp"
+        android:layout_marginBottom="-274dp"
+        android:rotation="-10"
+        android:text="00"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/marlboro"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/sec_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-46dp"
+        android:layout_marginBottom="-314dp"
+        android:rotation="-10"
+        android:text="00"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/marlboro"
+        android:textColor="@color/black"
+        android:shadowColor="#43A047"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        />
+
+    <TextView
+        android:id="@+id/end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/kolopsaro"
+        android:layout_width="243dp"
+        android:layout_height="37dp"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-44dp"
+        android:layout_marginBottom="-363dp"
+        android:text="Καλός Πολίτης Ψάρακα!"
+        android:visibility="invisible"
+        android:fontFamily="@font/marlboro"
+        android:textColor="@color/black"/>
 
 
 </RelativeLayout>
+
