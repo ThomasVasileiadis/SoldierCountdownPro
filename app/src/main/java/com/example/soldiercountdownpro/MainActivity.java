@@ -14,11 +14,13 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -120,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Please select homecoming and service started date and time.", Toast.LENGTH_LONG).show();
         }
         initView();
+        progressBarStart();
     }
 
     @Override
@@ -300,5 +303,31 @@ public class MainActivity extends AppCompatActivity {
         minLeft2.setVisibility(View.GONE);
         secLeft2.setVisibility(View.GONE);
         kolopsaro.setVisibility(View.VISIBLE);
+    }
+
+    public void progressBarStart(){
+        ProgressBar mProgressBar;
+        CountDownTimer mCountDownTimer;
+        final int[] i = {0};
+
+        mProgressBar=(ProgressBar)findViewById(R.id.progress_bar);
+        mProgressBar.setProgress(i[0]);
+        mCountDownTimer=new CountDownTimer(5000,1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.v("Log_tag", "Tick of Progress"+ i[0] + millisUntilFinished);
+                i[0]++;
+                mProgressBar.setProgress((int) i[0] *100/(5000/1000));
+            }
+
+            @Override
+            public void onFinish() {
+                //Do what you want
+                i[0]++;
+                mProgressBar.setProgress(100);
+            }
+        };
+        mCountDownTimer.start();
     }
 }
