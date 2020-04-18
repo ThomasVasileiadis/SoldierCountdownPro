@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -19,6 +18,7 @@ import android.widget.DatePicker;
 
 public class DatePreference extends DialogPreference implements
         DatePicker.OnDateChangedListener {
+
     public String dateString;
     private String changedValueCanBeNull;
     private DatePicker datePicker;
