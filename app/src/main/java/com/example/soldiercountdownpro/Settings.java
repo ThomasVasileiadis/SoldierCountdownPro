@@ -1,9 +1,7 @@
 package com.example.soldiercountdownpro;
 
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,14 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import java.util.Calendar;
-
 public class Settings extends PreferenceActivity {
     private TextView mDisplayDate;
     private static DatePickerDialog.OnDateSetListener mDateSetListener;
     public static EditText hours;
     public static EditText minutes;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +28,6 @@ public class Settings extends PreferenceActivity {
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment {
-
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
@@ -55,6 +49,7 @@ public class Settings extends PreferenceActivity {
                     return true;
                 }
             });
+
             //dp2 and blabla2 is for service started date
             final DatePreference dp2 = (DatePreference) findPreference("keyname2");
             String blabla2 = dp2.getText();
@@ -69,6 +64,7 @@ public class Settings extends PreferenceActivity {
                     return true;
                 }
             });
+
             //tp and blabla3 is for homecoming time
             final TimePreference tp = (TimePreference) findPreference("keyname3");
             String blabla3 = tp.getText();
@@ -83,6 +79,7 @@ public class Settings extends PreferenceActivity {
                     return true;
                 }
             });
+
             //tp2 and blabla4 is for service started time
             final TimePreference tp2 = (TimePreference) findPreference("keyname4");
             String blabla4 = tp2.getText();
@@ -120,8 +117,6 @@ public class Settings extends PreferenceActivity {
                     return true;
                 }
             });
-
-
         }
     }
 }
