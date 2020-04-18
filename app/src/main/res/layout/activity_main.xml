@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/camouflage_main"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:screenOrientation="portrait">
 
     <EditText
         android:id="@+id/editTextHH"
@@ -65,13 +66,13 @@
         android:background="@drawable/note"
         android:rotation="-10" />
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        style="?android:attr/progressBarStyle"-->
-<!--        android:layout_width="134dp"-->
-<!--        android:layout_height="178dp"-->
-<!--        android:layout_alignLeft="@id/personalPhoto"-->
-<!--        android:layout_marginLeft="256dp" />-->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="134dp"
+        android:layout_height="178dp"
+        android:layout_alignLeft="@id/personalPhoto"
+        android:layout_marginLeft="256dp" />
 
     <ImageView
         android:layout_width="186dp"
