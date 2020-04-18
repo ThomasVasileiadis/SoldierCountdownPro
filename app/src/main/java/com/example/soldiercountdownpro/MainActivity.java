@@ -35,7 +35,6 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sp;
-    private CountDownTimer countDownTimer;
     private boolean timerRunning;
     public long difference;
     public long elapsedTime;
@@ -94,36 +93,33 @@ public class MainActivity extends AppCompatActivity {
         String keyname3 = prefs.getString("keyname3", "");
         String keyname4 = prefs.getString("keyname4", "");
 
-            //Calling Calculator and passing the keynames I just got to calculate the difference between two dates in milliseconds
-
-            //NullPointerException error handling mechanism
-            initView();
-            if (!keyname.equals("") && !keyname2.equals("") & !keyname3.equals("") && !keyname4.equals("")) {
-                myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
-                try {
-                    elapsedTime = myCalculator.calculateElapsed();
-                } catch (ParseException | java.text.ParseException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    elapsedDays = myCalculator.calculateElapsedInDays();
-                } catch (ParseException | java.text.ParseException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    elapsedWeeks = myCalculator.calculateElapsedInWeeks();
-                } catch (ParseException | java.text.ParseException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    difference = myCalculator.calculateDifference();
-                } catch (ParseException | java.text.ParseException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Toast.makeText(this, "Please select homecoming and service started date and time.", Toast.LENGTH_LONG).show();
+        //NullPointerException error handling mechanism
+        if (!keyname.equals("") && !keyname2.equals("") & !keyname3.equals("") && !keyname4.equals("")) {
+            myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
+            try {
+                elapsedTime = myCalculator.calculateElapsed();
+            } catch (ParseException | java.text.ParseException e) {
+                e.printStackTrace();
             }
-
+            try {
+                elapsedDays = myCalculator.calculateElapsedInDays();
+            } catch (ParseException | java.text.ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                elapsedWeeks = myCalculator.calculateElapsedInWeeks();
+            } catch (ParseException | java.text.ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                difference = myCalculator.calculateDifference();
+            } catch (ParseException | java.text.ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(this, "Please select homecoming and service started date and time.", Toast.LENGTH_LONG).show();
+        }
+        initView();
     }
 
     @Override
@@ -133,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //When the user taps on the settings
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
