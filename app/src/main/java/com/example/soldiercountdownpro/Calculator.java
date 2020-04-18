@@ -35,25 +35,19 @@ public class Calculator  {
         }
     }
 
+    //Calculate elapsed time in milliseconds from start end date
     public long calculateElapsed() throws ParseException {
         Date date1 = this.parseDate(this.startDate + " " + this.startTime  ); // Start
         Date date2 = this.parseDate(this.endDate + " " + this.endTime ); // End
 
-
         long endTime = date1.getTime();
         Calendar calendar = Calendar.getInstance();
         long currtime = calendar.getTimeInMillis();
+
         return endTime - currtime;
-
-//        long endTime = date1.getTime();
-//        long diff = date2.getTime() - date1.getTime();
-//        long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-//        Calendar calendar = Calendar.getInstance();
-//        long currentTime = calendar.getTimeInMillis();
-//        long elapsedTime =  currentTime - endTime;
-//        long elapsedTimeInDays = elapsedTime / 86400000;
-
     }
+
+    //Calculate elapsed time in days until end date
     public long calculateElapsedInDays() throws ParseException {
         Date date1 = this.parseDate(this.startDate + " " + this.startTime  ); // Start
         Date date2 = this.parseDate(this.endDate + " " + this.endTime ); // End
@@ -66,6 +60,8 @@ public class Calculator  {
 
         return elapsedTimeInDays;
     }
+
+    //Calculate elapsed time in weeks until end date
     public long calculateElapsedInWeeks() throws ParseException {
         Date date1 = this.parseDate(this.startDate + " " + this.startTime  ); // Start
         Date date2 = this.parseDate(this.endDate + " " + this.endTime ); // End
@@ -79,6 +75,7 @@ public class Calculator  {
         return elapsedTimeInWeeks;
     }
 
+    //Calculate difference between two dates in milliseconds
     public long calculateDifference() throws ParseException {
         Date date1 = this.parseDate(this.startDate + " " + this.startTime  ); // Start
         Date date2 = this.parseDate(this.endDate + " " + this.endTime ); // End
@@ -90,6 +87,7 @@ public class Calculator  {
         return diff;
     }
 
+    //Method that is used to "combine" date and time
     private Date parseDate(String date) {
         for (String pattern:dateFormatStrings) {
             try{
@@ -100,5 +98,4 @@ public class Calculator  {
         }
         return null;
     }
-
 }
