@@ -186,13 +186,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void initView() {
-
         months_left2 = findViewById(R.id.months_left);
         daysLeft2 = findViewById(R.id.days_left);
         hrsLeft2 = findViewById(R.id.hrs_left);
         minLeft2 = findViewById(R.id.min_left);
         secLeft2 = findViewById(R.id.sec_left);
         kolopsaro = findViewById(R.id.kolopsaro);
+
         /*invoke countDownStart() method for start count down*/
         countDownStart();
     }
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                     final String endtime = prefs.getString("keyname3","") + ":00";
                     Date futureDate = dateFormat.parse(enddate+" "+endtime);
                     Date currentDate = new Date();
-                    /*if current date is not comes after future date*/
+                    /*if current date doesn't come after future date*/
                     if (!currentDate.after(futureDate)) {
 
                         String nowdate = java.time.LocalDate.now().toString();
@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
         CountDownTimer mCountDownTimer;
         final int[] i = {0};
 
-        mProgressBar=(ProgressBar)findViewById(R.id.progress_bar);
+        mProgressBar= findViewById(R.id.progress_bar);
         mProgressBar.setProgress(i[0]);
         mCountDownTimer=new CountDownTimer(5000,1000) {
 
@@ -318,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 Log.v("Log_tag", "Tick of Progress"+ i[0] + millisUntilFinished);
                 i[0]++;
-                mProgressBar.setProgress((int) i[0] *100/(5000/1000));
+                mProgressBar.setProgress(i[0] *100/(5000/1000));
             }
 
             @Override

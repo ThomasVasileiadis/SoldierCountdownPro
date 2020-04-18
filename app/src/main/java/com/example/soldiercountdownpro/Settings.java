@@ -113,7 +113,6 @@ public class Settings extends PreferenceActivity {
                         Toast toast2 = Toast.makeText(getActivity(), "Reminders are disabled.", Toast.LENGTH_SHORT);
                         toast2.show();
                     }
-
                     return true;
                 }
             });
