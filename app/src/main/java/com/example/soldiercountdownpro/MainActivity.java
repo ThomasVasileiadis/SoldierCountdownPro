@@ -1,15 +1,14 @@
 package com.example.soldiercountdownpro;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.ParseException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -23,26 +22,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
-
-import net.danlew.android.joda.JodaTimeAndroid;
-
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
-import org.joda.time.ReadablePartial;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
-
-
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sp;
@@ -53,28 +42,24 @@ public class MainActivity extends AppCompatActivity {
     public long elapsedDays;
     public long elapsedWeeks;
     public long daysLeft;
-    View countDownText;
     public Context mContext;
     private EditText hours;
     private EditText minutes;
     public TextView months_left2,weeks_left2,daysLeft2,hrsLeft2,minLeft2,secLeft2,endDate2,kolopsaro;
-    /*Handler Declaration*/
     private Handler handler;
-    /*set End Time for timer */
-//    private String endDateTime="2022-02-21 10:15:00";
     public Calculator myCalculator;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JodaTimeAndroid.init(this);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); // Get all the saved preferences from the settings activity
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs",Context.MODE_PRIVATE);
-        String imagePath = sp.getString("picturePath",""); //Get the saved imagePath and load it again whenever MainActivity is "created" again
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        String imagePath = sp.getString("picturePath", ""); //Get the saved imagePath and load it again whenever MainActivity is "created" again
         mContext = getApplicationContext();
 
-        hours = (EditText)findViewById(R.id.editTextHH);
+        hours = (EditText) findViewById(R.id.editTextHH);
         minutes = (EditText) findViewById(R.id.editTextMM);
 
         ActionBar actionBar = getSupportActionBar();
@@ -93,17 +78,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         boolean er = prefs.getBoolean("enableReminders", false);
-//        ComponentName receiver = new ComponentName(mContext, AlarmBootReceiver.class);
-//        PackageManager pm = mContext.getPackageManager();
+
         //If er(enableReminders) is true then enabled a scheduled alarm, else cancel it
-        if (er){
+        if (er) {
             NotificationHelper.scheduleRepeatingRTCNotification(mContext, hours.getText().toString(), minutes.getText().toString());
             NotificationHelper.enableBootReceiver(mContext);
-        }else {
+        } else {
             NotificationHelper.cancelAlarmRTC();
             NotificationHelper.disableBootReceiver(mContext);
         }
-
 
         //Getting values into MainActivity, for keynames, from sharedPreferences
         String keyname = prefs.getString("keyname", "");
@@ -111,32 +94,36 @@ public class MainActivity extends AppCompatActivity {
         String keyname3 = prefs.getString("keyname3", "");
         String keyname4 = prefs.getString("keyname4", "");
 
-        //Calling Calculator and passing the keynames I just got to calculate the difference between two dates in milliseconds
-        myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
+            //Calling Calculator and passing the keynames I just got to calculate the difference between two dates in milliseconds
 
-        initView();
+            //NullPointerException error handling mechanism
+            initView();
+            if (!keyname.equals("") && !keyname2.equals("") & !keyname3.equals("") && !keyname4.equals("")) {
+                myCalculator = new Calculator(keyname, keyname3, keyname2, keyname4);
+                try {
+                    elapsedTime = myCalculator.calculateElapsed();
+                } catch (ParseException | java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    elapsedDays = myCalculator.calculateElapsedInDays();
+                } catch (ParseException | java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    elapsedWeeks = myCalculator.calculateElapsedInWeeks();
+                } catch (ParseException | java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    difference = myCalculator.calculateDifference();
+                } catch (ParseException | java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(this, "Please select homecoming and service started date and time.", Toast.LENGTH_LONG).show();
+            }
 
-        try {
-            elapsedTime = myCalculator.calculateElapsed();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            elapsedDays = myCalculator.calculateElapsedInDays();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            elapsedWeeks = myCalculator.calculateElapsedInWeeks();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            difference = myCalculator.calculateDifference();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -201,13 +188,10 @@ public class MainActivity extends AppCompatActivity {
     public void initView() {
 
         months_left2 = findViewById(R.id.months_left);
-        weeks_left2 = findViewById(R.id.weeks_left);
         daysLeft2 = findViewById(R.id.days_left);
         hrsLeft2 = findViewById(R.id.hrs_left);
         minLeft2 = findViewById(R.id.min_left);
         secLeft2 = findViewById(R.id.sec_left);
-        endDate2 = findViewById(R.id.end_date);
-//        endDate2.setText(endDateTime);
         kolopsaro = findViewById(R.id.kolopsaro);
         /*invoke countDownStart() method for start count down*/
         countDownStart();
@@ -217,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
         Runnable runnable = new Runnable() {
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @SuppressLint("SetTextI18n")
             @Override
             public void run() {
@@ -225,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    // Please set date in  YYYY-MM-DD hh:mm:ss format
                     /*parse endDateTime in future date*/
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     final String enddate = prefs.getString("keyname", "");
@@ -242,16 +226,12 @@ public class MainActivity extends AppCompatActivity {
                         LocalDate end_dt = LocalDate.parse(enddate, dateformatter);
                         LocalDate start_dt = LocalDate.parse(nowdate,dateformatter);
 
-
-
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
                         Date d1 = format.parse(enddate+" "+endtime);
                         Date d2 = format.parse(nowdate+" "+nowtime);
                         long ddiff = d1.getTime() - d2.getTime();
                         Period period = Period.between(start_dt,end_dt);
-
-
 
                         long years = period.getYears();
                         long months = period.getMonths();
@@ -282,36 +262,27 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-
-
                         long weeks = day / 7 % 4;
 
                         while(day>=7){
                             day = day - 7;
                         }
 
-
-
                         long hours = ddiff / (60 * 60 * 1000) % 24;
                         long minutes = ddiff / (60 * 1000) % 60;
                         long seconds = ddiff / 1000 % 60;
 
-
-
-                        @SuppressLint("DefaultLocale") String yearsLeft = "" + String.format("%02d", years);
                         @SuppressLint("DefaultLocale") String monthsLeft = "" + String.format("%02d", months);
-                        @SuppressLint("DefaultLocale") String weeksLeft = "" + String.format("%02d", weeks);
                         @SuppressLint("DefaultLocale") String dayLeft = "" + String.format("%02d", ddday);
                         @SuppressLint("DefaultLocale") String hrLeft = "" + String.format("%02d", hours);
                         @SuppressLint("DefaultLocale") String minsLeft = "" + String.format("%02d", minutes);
                         @SuppressLint("DefaultLocale") String secondLeft = "" + String.format("%02d", seconds);
 
-                        months_left2.setText(monthsLeft+" Months");
-                        weeks_left2.setText(weeksLeft+" Weeks");
-                        daysLeft2.setText(dayLeft+" Days");
-                        hrsLeft2.setText(hrLeft+" Hours");
-                        minLeft2.setText(minsLeft+" Mins");
-                        secLeft2.setText(secondLeft+" Sec");
+                        months_left2.setText(monthsLeft+" MONTHS");
+                        daysLeft2.setText(dayLeft+" DAYS");
+                        hrsLeft2.setText(hrLeft+" HOURS");
+                        minLeft2.setText(minsLeft+" MINUTES");
+                        secLeft2.setText(secondLeft+" SECONDS");
 
                     } else {
                         textViewGone();
@@ -323,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 1000);
     }
+
     private void textViewGone() {
         months_left2.setVisibility(View.GONE);
         weeks_left2.setVisibility(View.GONE);
@@ -333,41 +305,3 @@ public class MainActivity extends AppCompatActivity {
         kolopsaro.setVisibility(View.VISIBLE);
     }
 }
-
-/*
-long months = ddiff / (24 * 60 * 60 * 1000);
-                        months = months / 30;
-
-                        long days;
-
-                        String check = enddate.split("-")[1];
-                        if(check == "01" || check == "03" || check == "05" || check == "07" || check == "08" || check == "10" || check == "12"){
-                            days = ddiff / (24 * 60 * 60 * 1000)%31;
-                        }
-                        else if(check == "04" || check == "06" || check == "09" || check == "11"){
-                            days = ddiff / (24 * 60 * 60 * 1000)%30;
-                        }
-                        else{
-                            int checky = Integer.parseInt(enddate.split("-")[0]);
-                            if(checky % 4 == 0) {
-                                days = ddiff / (24 * 60 * 60 * 1000) % 29;
-                            }
-                            else{
-                                days = ddiff / (24 * 60 * 60 * 1000) % 28;
-                            }
-                        }
-
-
-
-                        long weeks = days / 7 % 4;
-                        if(weeks == 4){
-                            weeks = weeks -1;
-                        }
-                        if(weeks == 0){
-                            weeks = 3;
-                        }
-                        while(days>=7){
-                            days = days - 7;
-                        }
-
- */
