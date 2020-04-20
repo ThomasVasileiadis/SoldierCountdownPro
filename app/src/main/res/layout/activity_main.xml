@@ -33,7 +33,7 @@
         android:layout_width="220dp"
         android:layout_height="240dp"
         android:background="@drawable/frame"
-        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+        app:srcCompat="@android:drawable/divider_horizontal_bright"/>
 
     <ImageView
         android:id="@+id/frame"
@@ -44,7 +44,7 @@
         android:layout_marginRight="18dp"
         android:layout_marginBottom="56dp"
         android:background="@drawable/soldier"
-        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+        app:srcCompat="@android:drawable/divider_horizontal_bright"/>
 
     <ImageView
         android:id="@+id/timer"
@@ -53,7 +53,7 @@
         android:layout_alignLeft="@id/personalPhoto"
         android:layout_marginLeft="234dp"
         android:background="@drawable/timer"
-        app:srcCompat="@android:drawable/divider_horizontal_bright" />
+        app:srcCompat="@android:drawable/divider_horizontal_bright"/>
 
     <ImageView
         android:id="@+id/bignote"
@@ -64,15 +64,29 @@
         android:layout_marginRight="-191dp"
         android:layout_marginBottom="-452dp"
         android:background="@drawable/note"
-        android:rotation="-10" />
+        android:rotation="-10"/>
 
     <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="134dp"
-        android:layout_height="178dp"
-        android:layout_alignLeft="@id/personalPhoto"
-        android:layout_marginLeft="256dp" />
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="152dp"
+        android:layout_height="132dp"
+        android:layout_alignRight="@id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-178dp"
+        android:layout_marginBottom="85dp"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:visibility="invisible"/>
 
     <ImageView
         android:layout_width="186dp"
@@ -81,7 +95,36 @@
         android:layout_alignBottom="@+id/personalPhoto"
         android:layout_marginRight="-156dp"
         android:layout_marginBottom="-123dp"
-        android:background="@drawable/chain" />
+        android:background="@drawable/chain"/>
+
+    <TextView
+        android:id="@+id/total_days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-98dp"
+        android:layout_marginBottom="-27dp"
+        android:fontFamily="@font/marlboro"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="42dp"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-102dp"
+        android:layout_marginBottom="-88dp"
+        android:fontFamily="@font/marlboro"
+        android:rotation="14"
+        android:text="DAYS"
+        android:textColor="#FFFFFF"
+        android:textSize="42dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/months_left"
@@ -96,7 +139,7 @@
         android:text="00 "
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/days_left"
@@ -111,7 +154,7 @@
         android:text="00 "
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/hrs_left"
@@ -126,7 +169,7 @@
         android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/min_left"
@@ -141,7 +184,7 @@
         android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/sec_left"
@@ -159,13 +202,13 @@
         android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/end_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible" />
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/kolopsaro"
@@ -178,7 +221,7 @@
         android:text="Καλός Πολίτης Ψάρακα!"
         android:visibility="invisible"
         android:fontFamily="@font/marlboro"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"/>
 
 </RelativeLayout>
 
