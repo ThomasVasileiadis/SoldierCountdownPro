@@ -10,11 +10,9 @@ import android.net.ParseException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +35,6 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sp;
-    private boolean timerRunning;
     public long difference;
     public long elapsedTime;
     public long elapsedDays;
@@ -46,9 +43,11 @@ public class MainActivity extends AppCompatActivity {
     public Context mContext;
     private EditText hours;
     private EditText minutes;
-    public TextView months_left2,weeks_left2,daysLeft2,hrsLeft2,minLeft2,secLeft2,endDate2,kolopsaro;
+    public TextView months_left2,weeks_left2,daysLeft2,hrsLeft2,minLeft2,secLeft2,endDate2,kolopsaro,total_days;
     private Handler handler;
     public Calculator myCalculator;
+    ProgressBar progressBar;
+    TextView textCounter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -58,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); // Get all the saved preferences from the settings activity
         SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String imagePath = sp.getString("picturePath", ""); //Get the saved imagePath and load it again whenever MainActivity is "created" again
+        progressBar = (ProgressBar)findViewById(R.id.progressbar);
+        textCounter = (TextView)findViewById(R.id.counter);
         mContext = getApplicationContext();
 
         hours = (EditText) findViewById(R.id.editTextHH);
@@ -122,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Please select homecoming and service started date and time.", Toast.LENGTH_LONG).show();
         }
         initView();
-        progressBarStart();
     }
 
     @Override
@@ -192,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         minLeft2 = findViewById(R.id.min_left);
         secLeft2 = findViewById(R.id.sec_left);
         kolopsaro = findViewById(R.id.kolopsaro);
+        total_days = findViewById(R.id.total_days);
 
         /*invoke countDownStart() method for start count down*/
         countDownStart();
@@ -216,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
                     final String endtime = prefs.getString("keyname3","") + ":00";
                     Date futureDate = dateFormat.parse(enddate+" "+endtime);
                     Date currentDate = new Date();
+                    TextView progressText = findViewById(R.id.progress_text);
+
                     /*if current date doesn't come after future date*/
                     if (!currentDate.after(futureDate)) {
 
@@ -278,11 +281,25 @@ public class MainActivity extends AppCompatActivity {
                         @SuppressLint("DefaultLocale") String minsLeft = "" + String.format("%02d", minutes);
                         @SuppressLint("DefaultLocale") String secondLeft = "" + String.format("%02d", seconds);
 
-                        months_left2.setText(monthsLeft+" MONTHS");
-                        daysLeft2.setText(dayLeft+" DAYS");
-                        hrsLeft2.setText(hrLeft+" HOURS");
-                        minLeft2.setText(minsLeft+" MINUTES");
-                        secLeft2.setText(secondLeft+" SECONDS");
+                        months_left2.setText(monthsLeft+" -MONTHS-");
+                        daysLeft2.setText(dayLeft+" -DAYS-");
+                        hrsLeft2.setText(hrLeft+" -HOURS-");
+                        minLeft2.setText(minsLeft+" -MINUTES-");
+                        secLeft2.setText(secondLeft+" -SECONDS-");
+                        total_days.setText(days + "");
+
+                        /*Set the progress to the progressbar correctly */
+                        if(elapsedDays<difference) {
+                            int max = (int) (difference / 86400000);
+                            int progress = (int) elapsedDays;
+                            if (progress < 0) {
+                                progress = progress * (-1);
+                            }
+                            progressBar.setMax(max);
+                            progressBar.setProgress(progress);
+                            int precentage = (progress*100)/max;
+                            progressText.setText(precentage+"% left");
+                        }
 
                     } else {
                         textViewGone();
@@ -303,31 +320,5 @@ public class MainActivity extends AppCompatActivity {
         minLeft2.setVisibility(View.GONE);
         secLeft2.setVisibility(View.GONE);
         kolopsaro.setVisibility(View.VISIBLE);
-    }
-
-    public void progressBarStart(){
-        ProgressBar mProgressBar;
-        CountDownTimer mCountDownTimer;
-        final int[] i = {0};
-
-        mProgressBar= findViewById(R.id.progress_bar);
-        mProgressBar.setProgress(i[0]);
-        mCountDownTimer=new CountDownTimer(5000,1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                Log.v("Log_tag", "Tick of Progress"+ i[0] + millisUntilFinished);
-                i[0]++;
-                mProgressBar.setProgress(i[0] *100/(5000/1000));
-            }
-
-            @Override
-            public void onFinish() {
-                //Do what you want
-                i[0]++;
-                mProgressBar.setProgress(100);
-            }
-        };
-        mCountDownTimer.start();
     }
 }
