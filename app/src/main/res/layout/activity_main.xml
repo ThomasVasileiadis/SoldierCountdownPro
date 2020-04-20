@@ -52,7 +52,7 @@
         android:layout_height="177dp"
         android:layout_alignLeft="@id/personalPhoto"
         android:layout_marginLeft="234dp"
-        android:background="@drawable/timer"
+        android:background="@drawable/timernew"
         app:srcCompat="@android:drawable/divider_horizontal_bright"/>
 
     <ImageView
@@ -78,6 +78,19 @@
         android:max="100"
         android:progress="100"
         android:progressDrawable="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/progress_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/personalPhoto"
+        android:layout_alignBottom="@+id/personalPhoto"
+        android:layout_marginRight="-138dp"
+        android:layout_marginBottom="140dp"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/counter"
@@ -111,7 +124,6 @@
         android:textSize="42dp"
         android:textStyle="bold"/>
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -132,14 +144,14 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/personalPhoto"
         android:layout_alignBottom="@+id/personalPhoto"
-        android:layout_marginRight="9dp"
-        android:layout_marginBottom="-137dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="-141dp"
         android:fontFamily="@font/marlboro"
         android:rotation="-10"
-        android:text="00 "
+        android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/days_left"
@@ -147,14 +159,14 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/personalPhoto"
         android:layout_alignBottom="@+id/personalPhoto"
-        android:layout_marginRight="-11dp"
-        android:layout_marginBottom="-171dp"
+        android:layout_marginRight="-1dp"
+        android:layout_marginBottom="-170dp"
         android:fontFamily="@font/marlboro"
         android:rotation="-10"
-        android:text="00 "
+        android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/hrs_left"
@@ -162,14 +174,14 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/personalPhoto"
         android:layout_alignBottom="@+id/personalPhoto"
-        android:layout_marginRight="-16dp"
-        android:layout_marginBottom="-202dp"
+        android:layout_marginRight="-11dp"
+        android:layout_marginBottom="-200dp"
         android:fontFamily="@font/marlboro"
         android:rotation="-10"
         android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/min_left"
@@ -177,14 +189,14 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/personalPhoto"
         android:layout_alignBottom="@+id/personalPhoto"
-        android:layout_marginRight="-34dp"
-        android:layout_marginBottom="-231dp"
+        android:layout_marginRight="-19dp"
+        android:layout_marginBottom="-232dp"
         android:fontFamily="@font/marlboro"
         android:rotation="-10"
         android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/sec_left"
@@ -192,8 +204,8 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/personalPhoto"
         android:layout_alignBottom="@+id/personalPhoto"
-        android:layout_marginRight="-66dp"
-        android:layout_marginBottom="-265dp"
+        android:layout_marginRight="-23dp"
+        android:layout_marginBottom="-264dp"
         android:fontFamily="@font/marlboro"
         android:rotation="-10"
         android:shadowColor="#43A047"
@@ -202,7 +214,7 @@
         android:text="00"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/end_date"
