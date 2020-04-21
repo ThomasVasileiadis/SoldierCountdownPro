@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String imagePath = sp.getString("picturePath", ""); //Get the saved imagePath and load it again whenever MainActivity is "created" again
         progressBar = (ProgressBar)findViewById(R.id.progressbar);
-        textCounter = (TextView)findViewById(R.id.counter);
+        //textCounter = (TextView)findViewById(R.id.counter);
         mContext = getApplicationContext();
 
         hours = (EditText) findViewById(R.id.editTextHH);

@@ -79,10 +79,7 @@ public class Calculator  {
     public long calculateDifference() throws ParseException {
         Date date1 = this.parseDate(this.startDate + " " + this.startTime  ); // Start
         Date date2 = this.parseDate(this.endDate + " " + this.endTime ); // End
-        long endTime = date2.getTime();
         long diff = date1.getTime() - date2.getTime() ;
-        long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        long currentTime= System.currentTimeMillis();
 
         return diff;
     }
@@ -92,7 +89,7 @@ public class Calculator  {
         for (String pattern:dateFormatStrings) {
             try{
                 return new SimpleDateFormat(pattern).parse(date);
-            } catch(Exception e){
+            } catch(Exception ignored){
 
             }
         }
