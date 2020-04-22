@@ -15,15 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.project.soldiercountdownpro.info.project.soldiercountdownpro.Settings"></activity>
-        <activity android:name="com.project.soldiercountdownpro.info.project.soldiercountdownpro.MainActivity">
+        <activity android:name="com.project.soldiercountdownpro.Settings"></activity>
+        <activity android:name="com.project.soldiercountdownpro.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <receiver android:name=".notification.AlarmReceiver"/>
-        <receiver android:name="com.project.soldiercountdownpro.info.project.soldiercountdownpro.AlarmBootReceiver"/>
+        <receiver android:name="com.project.soldiercountdownpro.AlarmBootReceiver"/>
         <receiver android:name=".notification.AlarmBootReceiver"
             android:enabled="false">
             <intent-filter>

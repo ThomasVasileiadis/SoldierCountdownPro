@@ -28,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.bumptech.glide.Glide;
 import com.project.soldiercountdownpro.R;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
