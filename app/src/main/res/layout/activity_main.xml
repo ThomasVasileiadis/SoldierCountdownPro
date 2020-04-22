@@ -37,10 +37,10 @@
         android:layout_height="224dp"
         android:background="@drawable/frame"
         app:layout_constraintBottom_toTopOf="@+id/bignote"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/personalPhoto"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/divider_horizontal_bright"
-        tools:layout_editor_absoluteX="3dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/frame"
@@ -82,7 +82,7 @@
     <ImageView
         android:id="@+id/bignote"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="480dp"
         android:background="@drawable/note"
         android:rotation="-10"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -90,7 +90,6 @@ public class Calculator  {
             try{
                 return new SimpleDateFormat(pattern).parse(date);
             } catch(Exception ignored){
-
             }
         }
         return null;
