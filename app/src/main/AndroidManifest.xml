@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.soldiercountdownpro">
+    package="com.project.soldiercountdownpro">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -15,15 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Settings"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.project.soldiercountdownpro.info.project.soldiercountdownpro.Settings"></activity>
+        <activity android:name="com.project.soldiercountdownpro.info.project.soldiercountdownpro.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <receiver android:name=".notification.AlarmReceiver"/>
-        <receiver android:name=".AlarmBootReceiver"/>
+        <receiver android:name="com.project.soldiercountdownpro.info.project.soldiercountdownpro.AlarmBootReceiver"/>
         <receiver android:name=".notification.AlarmBootReceiver"
             android:enabled="false">
             <intent-filter>

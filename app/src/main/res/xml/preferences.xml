@@ -4,22 +4,22 @@
     android:screenOrientation="portrait">
 
     <PreferenceCategory android:title="Homecoming Date">
-        <com.example.soldiercountdownpro.DatePreference
+        <com.project.soldiercountdownpro.DatePreference
             android:key="keyname"
             android:title="Date"
             android:summary="Summary" />
-        <com.example.soldiercountdownpro.TimePreference
+        <com.project.soldiercountdownpro.TimePreference
             android:key="keyname3"
             android:title="Time"
             android:summary="" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Service Started">
-        <com.example.soldiercountdownpro.DatePreference
+        <com.project.soldiercountdownpro.DatePreference
             android:key="keyname2"
             android:title="Date"
             android:summary="Summary" />
-        <com.example.soldiercountdownpro.TimePreference
+        <com.project.soldiercountdownpro.TimePreference
             android:key="keyname4"
             android:title="Time"
             android:summary="" />

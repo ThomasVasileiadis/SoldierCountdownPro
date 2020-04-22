@@ -1,4 +1,4 @@
-package com.example.soldiercountdownpro;
+package com.project.soldiercountdownpro;
 
 import android.os.Build;
 import androidx.annotation.RequiresApi;

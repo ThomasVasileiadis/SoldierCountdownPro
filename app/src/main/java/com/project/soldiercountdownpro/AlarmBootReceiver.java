@@ -1,4 +1,4 @@
-package com.example.soldiercountdownpro;
+package com.project.soldiercountdownpro;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
