@@ -1,5 +1,6 @@
-package com.example.soldiercountdownpro;
+package com.project.soldiercountdownpro;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,49 +15,48 @@ import android.os.Parcelable;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.DatePicker;
+import android.widget.TimePicker;
 
-public class DatePreference extends DialogPreference implements
-        DatePicker.OnDateChangedListener {
-
-    public String dateString;
+public class TimePreference extends DialogPreference implements TimePicker.OnTimeChangedListener {
+    public String timeString;
     private String changedValueCanBeNull;
-    private DatePicker datePicker;
     public String dateValue;
     private CharSequence mSummary;
 
-    public DatePreference(Context context, AttributeSet attrs, int defStyle) {
+    public TimePreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public DatePreference(Context context, AttributeSet attrs) {
+    public TimePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     /**
-     * Produces a DatePicker set to the date produced by {@link #getDate()}. When
+     * Produces a TimePicker set to the time produced by {@link #getTime()}. When
      * overriding be sure to call the super.
      *
      * @return a DatePicker with the date set
      */
     @Override
     protected View onCreateDialogView() {
-        this.datePicker = new DatePicker(getContext());
-        Calendar calendar = getDate();
-        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), this);
-        return datePicker;
+        TimePicker timePicker = new TimePicker(getContext());
+        timePicker.setIs24HourView(android.text.format.DateFormat.is24HourFormat(getContext()));
+        Calendar calendar = getTime();
+        timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+        timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
+        timePicker.setOnTimeChangedListener(this);
+        return timePicker;
     }
 
     /**
-     * Produces the date used for the date picker. If the user has not selected a
-     * date, produces the default from the XML's android:defaultValue. If the
+     * Produces the time used for the time picker. If the user has not selected a
+     * time, produces the default from the XML's android:defaultValue. If the
      * default is not set in the XML or if the XML's default is invalid it uses
      * the value produced by {@link #defaultCalendar()}.
      *
-     * @return the Calendar for the date picker
+     * @return the Calendar for the time picker
      */
-    public Calendar getDate() {
+    public Calendar getTime() {
         try {
             Date date = formatter().parse(defaultValue());
             Calendar cal = Calendar.getInstance();
@@ -68,34 +68,34 @@ public class DatePreference extends DialogPreference implements
     }
 
     /**
-     * Set the selected date to the specified string.
+     * Set the selected time to the specified string.
      *
-     * @param dateString
+     * param dateString
      *          The date, represented as a string, in the format specified by
      *          {@link #formatter()}.
      */
-    public void setDate(String dateString) {
-        this.dateString = dateString;
+    public void setTime(String timeString) {
+        this.timeString = timeString;
     }
 
     /**
-     * Produces the date formatter used for dates in the XML. The default is yyyy.MM.dd.
+     * Produces the date formatter used for times in the XML. The default is HH:mm.
      * Override this to change that.
      *
-     * @return the SimpleDateFormat used for XML dates
+     * @return the SimpleDateFormat used for XML times
      */
-    public static SimpleDateFormat formatter() {
-        return new SimpleDateFormat("yyyy-MM-dd");
+    public static DateFormat formatter() {
+        return new SimpleDateFormat("HH:mm");
     }
 
     /**
-     * Produces the date formatter used for showing the date in the summary. The default is MMMM dd, yyyy.
+     * Produces the date formatter used for showing the time in the summary.
      * Override this to change it.
      *
      * @return the SimpleDateFormat used for summary dates
      */
-    public static SimpleDateFormat summaryFormatter() {
-        return new SimpleDateFormat("MMMM dd, yyyy");
+    public static DateFormat summaryFormatter(Context context) {
+        return android.text.format.DateFormat.getTimeFormat(context);
     }
 
     @Override
@@ -104,19 +104,19 @@ public class DatePreference extends DialogPreference implements
     }
 
     /**
-     * Called when the date picker is shown or restored. If it's a restore it gets
+     * Called when the time picker is shown or restored. If it's a restore it gets
      * the persisted value, otherwise it persists the value.
      */
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object def) {
         if (restoreValue) {
-            this.dateString = getPersistedString(defaultValue());
-            setTheDate(this.dateString);
+            this.timeString = getPersistedString(defaultValue());
+            setTheTime(this.timeString);
         } else {
-            boolean wasNull = this.dateString == null;
-            setDate((String) def);
+            boolean wasNull = this.timeString == null;
+            setTime((String) def);
             if (!wasNull)
-                persistDate(this.dateString);
+                persistTime(this.timeString);
         }
     }
 
@@ -138,80 +138,74 @@ public class DatePreference extends DialogPreference implements
     protected void onRestoreInstanceState(Parcelable state) {
         if (state == null || !state.getClass().equals(SavedState.class)) {
             super.onRestoreInstanceState(state);
-            setTheDate(((SavedState) state).dateValue);
+            setTheTime(((SavedState) state).dateValue);
         } else {
             SavedState s = (SavedState) state;
             super.onRestoreInstanceState(s.getSuperState());
-            setTheDate(s.dateValue);
+            setTheTime(s.dateValue);
         }
     }
 
     /**
-     * Called when the user changes the date.
+     * TODO: Called when the user changes the time.
      */
-    public void onDateChanged(DatePicker view, int year, int month, int day) {
-        Calendar selected = new GregorianCalendar(year, month, day);
+    public void onTimeChanged(TimePicker view, int hour, int minute) {
+        Calendar selected = new GregorianCalendar(1970,0,1,hour,minute);
         this.changedValueCanBeNull = formatter().format(selected.getTime());
     }
 
     /**
-     * Called when the dialog is closed. If the close was by pressing "OK" it
-     * saves the value.
+     * Called when the dialog is closed. If the close was by pressing
+     * DialogInterface.BUTTON_POSITIVE it saves the value.
      */
     @Override
     protected void onDialogClosed(boolean shouldSave) {
         if (shouldSave && this.changedValueCanBeNull != null) {
-            setTheDate(this.changedValueCanBeNull);
+            setTheTime(this.changedValueCanBeNull);
             this.changedValueCanBeNull = null;
         }
     }
 
-    private void setTheDate(String s) {
-        setDate(s);
-        persistDate(s);
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        super.onClick(dialog, which);
+        if (getDialog().getCurrentFocus() != null)
+            getDialog().getCurrentFocus().clearFocus();
     }
 
-    private void persistDate(String s) {
+    private void setTheTime(String s) {
+        setTime(s);
+        persistTime(s);
+    }
+
+    private void persistTime(String s) {
         persistString(s);
-        setSummary(summaryFormatter().format(getDate().getTime()));
+        setSummary(summaryFormatter(getContext()).format(getTime().getTime()));
     }
 
     /**
-     * The default date to use when the XML does not set it or the XML has an
+     * The default time to use when the XML does not set it or the XML has an
      * error.
      *
      * @return the Calendar set to the default date
      */
     public static Calendar defaultCalendar() {
-        return new GregorianCalendar(2020, 0, 1);
+        return new GregorianCalendar(2020, 0, 1, 0, 0);
     }
 
     /**
      * The defaultCalendar() as a string using the {@link #formatter()}.
      *
-     * @return a String representation of the default date
+     * @return a String representation of the default time
      */
     public static String defaultCalendarString() {
         return formatter().format(defaultCalendar().getTime());
     }
 
     private String defaultValue() {
-        if (this.dateString == null)
-            setDate(defaultCalendarString());
-        return this.dateString;
-    }
-
-    /**
-     * Called whenever the user clicks on a button. Invokes {@link #onDateChanged(DatePicker, int, int, int)}
-     * and {@link #onDialogClosed(boolean)}. Be sure to call the super when overriding.
-     */
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        super.onClick(dialog, which);
-        datePicker.clearFocus();
-        onDateChanged(datePicker, datePicker.getYear(), datePicker.getMonth(),
-                datePicker.getDayOfMonth());
-        onDialogClosed(which == DialogInterface.BUTTON1); // OK?
+        if (this.timeString == null)
+            setTime(defaultCalendarString());
+        return this.timeString;
     }
 
     /**
@@ -224,7 +218,7 @@ public class DatePreference extends DialogPreference implements
      *          the name of the preference to get the date from
      * @return a Calendar that the user has selected
      */
-    public static Calendar getDateFor(SharedPreferences preferences, String field) {
+    public static Calendar getTimeFor(SharedPreferences preferences, String field) {
         Date date = stringToDate(preferences.getString(field,
                 defaultCalendarString()));
         Calendar cal = Calendar.getInstance();
@@ -232,13 +226,14 @@ public class DatePreference extends DialogPreference implements
         return cal;
     }
 
-    private static Date stringToDate(String dateString) {
+    private static Date stringToDate(String timeString) {
         try {
-            return formatter().parse(dateString);
+            return formatter().parse(timeString);
         } catch (ParseException e) {
             return defaultCalendar().getTime();
         }
     }
+
 
     private static class SavedState extends BaseSavedState {
         public String dateValue;
@@ -276,11 +271,12 @@ public class DatePreference extends DialogPreference implements
             notifyChanged();
         }
     }
+
     public CharSequence getSummary() {
         return mSummary;
     }
     public String getText() {
-        return dateString;
+        return timeString;
     }
 
 }

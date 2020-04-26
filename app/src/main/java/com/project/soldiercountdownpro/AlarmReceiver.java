@@ -1,4 +1,4 @@
-package com.example.soldiercountdownpro;
+package com.project.soldiercountdownpro;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;

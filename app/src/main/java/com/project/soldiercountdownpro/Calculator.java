@@ -1,4 +1,4 @@
-package com.example.soldiercountdownpro;
+package com.project.soldiercountdownpro;
 
 import android.os.Build;
 import androidx.annotation.RequiresApi;
@@ -90,7 +90,6 @@ public class Calculator  {
             try{
                 return new SimpleDateFormat(pattern).parse(date);
             } catch(Exception ignored){
-
             }
         }
         return null;

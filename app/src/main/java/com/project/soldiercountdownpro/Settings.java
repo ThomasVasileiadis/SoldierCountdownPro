@@ -1,4 +1,4 @@
-package com.example.soldiercountdownpro;
+package com.project.soldiercountdownpro;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+import com.project.soldiercountdownpro.R;
 
 public class Settings extends PreferenceActivity {
     private TextView mDisplayDate;

@@ -1,4 +1,4 @@
-package com.example.soldiercountdownpro;
+package com.project.soldiercountdownpro;
 
 import org.junit.Test;
 
